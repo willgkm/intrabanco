@@ -1,3 +1,5 @@
+import { QrCode } from "./QrCode";
+
 export type RespostaRegistraBoleto = {
   numero: string;
   numeroCarteira:  number;
@@ -23,8 +25,3 @@ type Beneficiario = {
   indicadorComprovacao: string;
 };
 
-type QrCode = {
-  url: string;
-  txId: string;
-  emv: string;
-};

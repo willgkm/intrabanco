@@ -1,11 +1,15 @@
 import { AxiosPromise } from "axios";
 import apiBancoDoBrasil from "../config/AxiosBancoDoBrasil";
-import { AlteraBoleto } from "../types/AlteraBoleto";
-import { RequisicaoListaBoleto } from "../types/RequisicaoListaBoletos";
-import { RequisicaoRegistroBoleto } from "../types/RequisicaoRegistraBoleto";
-import { RespostaDetalhesBoleto } from "../types/RespostaDetalhesBoleto";
-import { RespostaListaBoletos } from "../types/RespostaListaBoletos";
-import { RespostaRegistraBoleto } from "../types/RespostaRegistraBoleto";
+import { RequisicaoAlteraBoleto } from "../types/cobranca/RequisicaoAlteraBoleto";
+import { RequisicaoListaBoleto } from "../types/cobranca/RequisicaoListaBoletos";
+import { RequisicaoRegistroBoleto } from "../types/cobranca/RequisicaoRegistraBoleto";
+import { RespostaAlteraBoleto } from "../types/cobranca/RespostaAlteraBoleto";
+import { RespostaBaixaBoleto } from "../types/cobranca/RespostaBaixaBoleto";
+import { RespostaGararOuCancelaPix } from "../types/cobranca/RespostaCancelaPix";
+import { RespostaConsultaPixBoleto } from "../types/cobranca/RespostaConsultaPixBoleto";
+import { RespostaDetalhesBoleto } from "../types/cobranca/RespostaDetalhesBoleto";
+import { RespostaListaBoletos } from "../types/cobranca/RespostaListaBoletos";
+import { RespostaRegistraBoleto } from "../types/cobranca/RespostaRegistraBoleto";
 
 export default class CobrancaApiService {
   async listaBoletos(
@@ -25,7 +29,7 @@ export default class CobrancaApiService {
   }
 
   async detalhesBoleto(
-    tituloDeCobranca: number,
+    tituloDeCobranca: string,
     numeroConvenio: number
   ): AxiosPromise<RespostaDetalhesBoleto> {
     return await apiBancoDoBrasil.get(`/boletos/${tituloDeCobranca}`, {
@@ -34,12 +38,61 @@ export default class CobrancaApiService {
   }
 
   async alteraBoleto(
-    tituloDeCobranca: number,
-    body: AlteraBoleto
-  ): AxiosPromise<AlteraBoleto> {
+    tituloDeCobranca: string,
+    body: RequisicaoAlteraBoleto
+  ): AxiosPromise<RespostaAlteraBoleto> {
     return await apiBancoDoBrasil.patch(`/boletos/${tituloDeCobranca}`, {
-      params: {},
       data: body,
+    });
+  }
+
+  /**
+   *! Lembrete importante
+   * numeroBoleto = Número do boleto bancário (único e exclusivo) que identifica o título e é usado para pagá-lo.
+   */
+  async baixarBoleto(
+    numeroBoleto: string,
+    numeroConvenio: number
+  ): AxiosPromise<RespostaBaixaBoleto> {
+    return await apiBancoDoBrasil.post(`/boletos/${numeroBoleto}/baixar`, {
+      data: { numeroConvenio: numeroConvenio },
+    });
+  }
+
+  /**
+   *! Lembrete importante - vale para os metodos cancelaPixBoleto, gerarPixBoleto, consultaPixBoleto
+   * numeroBoleto = Número de identificação do boleto (correspondente ao NOSSO NÚMERO,
+   * numeroTituloCliente), no formato STRING, com 20 dígitos, que deverá ser formatado
+   * da seguinte forma: “000” + (número do convênio com 7 dígitos) +
+   * (10 algarismos - se necessário, completar com zeros à esquerda). Campo Obrigatório..
+   */
+  async cancelaPixBoleto(
+    numeroBoleto: string,
+    numeroConvenio: number
+  ): AxiosPromise<RespostaGararOuCancelaPix> {
+    return await apiBancoDoBrasil.post(
+      `/boletos/${numeroBoleto}/cancelar-pix`,
+      {
+        data: { numeroConvenio: numeroConvenio },
+      }
+    );
+  }
+
+  async gerarPixBoleto(
+    numeroBoleto: string,
+    numeroConvenio: number
+  ): AxiosPromise<RespostaGararOuCancelaPix> {
+    return await apiBancoDoBrasil.post(`/boletos/${numeroBoleto}/gerar-pix`, {
+      data: { numeroConvenio: numeroConvenio },
+    });
+  }
+
+  async consultaPixBoleto(
+    numeroBoleto: string,
+    numeroConvenio: number
+  ): AxiosPromise<RespostaConsultaPixBoleto> {
+    return await apiBancoDoBrasil.get(`/boletos/${numeroBoleto}/pix`, {
+      params: { numeroConvenio: numeroConvenio },
     });
   }
 }

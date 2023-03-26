@@ -1,6 +1,6 @@
 import { Juros } from "./Juros";
 
-export type AlteraBoleto = {
+export type RequisicaoAlteraBoleto = {
   numeroConvenio?: number;
   indicadorNovaDataVencimento: string;
   alteracaoData?: AlteracaoData;

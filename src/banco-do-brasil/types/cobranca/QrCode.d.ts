@@ -4,9 +4,8 @@ export type QrCode = {
   emv: string;
 };
 
-export type QrCodeComTipo = QrCode & TipoQrCode 
+export type QrCodeComTipo = QrCode & TipoQrCode;
 
 type TipoQrCode = {
   url: number;
 };
-

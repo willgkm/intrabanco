@@ -2,9 +2,8 @@ export type RespostaListaBoletos = {
   indicadorContinuidade: string;
   quantidadeRegistros: number;
   proximoIndice: number;
-  boletos: Array<Boletos>
+  boletos: Array<Boletos>;
 };
-
 
 type Boletos = {
   numeroBoletoBB: string;

@@ -9,12 +9,11 @@ apiBancoDoBrasil.defaults.baseURL = endPointHomologacao;
 apiBancoDoBrasil.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded";
 
-apiBancoDoBrasil.interceptors.request.use( (config) => {
+apiBancoDoBrasil.interceptors.request.use((config) => {
   config.params = config.params || {};
   config.params["gw-app-key"] = "123";
 
-  return config
-
+  return config;
 });
 
 export default apiBancoDoBrasil;

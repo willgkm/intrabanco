@@ -1,5 +1,5 @@
 export type RespostaBaixaBoleto = {
-  numeroContratoCobranca: string,
-  dataBaixa: string,
-  horarioBaixa: string,
-}
+  numeroContratoCobranca: string;
+  dataBaixa: string;
+  horarioBaixa: string;
+};

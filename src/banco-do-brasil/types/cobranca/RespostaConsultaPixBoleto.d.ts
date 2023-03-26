@@ -8,6 +8,6 @@ export type RespostaConsultaPixBoleto = {
   contaBeneficiario: number;
   valorOriginalTituloCobranca: number;
   validadeTituloCobranca: string;
-  pix: Pix
-  qrCode: QrCodeComTipo
+  pix: Pix;
+  qrCode: QrCodeComTipo;
 };

@@ -1,0 +1,23 @@
+export type RequisicaoListaBoleto = {
+  //gw-dev-app-key: string;
+  indicadorSituacao: string;
+  contaCaucao?: number;
+  agenciaBeneficiario: number;
+  contaBeneficiario: number;
+  carteiraConvenio?: number;
+  variacaoCarteiraConvenio?: number;
+  modalidadeCobranca?: number;
+  cnpjPagador?: number;
+  digitoCNPJPagador?: number;
+  cpfPagador?: number;
+  digitoCPFPagador?: number;
+  dataInicioVencimento?: string;
+  dataFimVencimento?: string;
+  dataInicioRegistro?: string;
+  dataFimRegistro?: string;
+  dataInicioMovimento?: string;
+  dataFimMovimento?: string;
+  codigoEstadoTituloCobranca?: number;
+  boletoVencido?: string;
+  indice?: number;
+};

@@ -25,19 +25,19 @@ export default class CobrancaApiService {
   }
 
   async detalhesBoleto(
-    pathParams: any,
+    tituloDeCobranca: number,
     numeroConvenio: number
   ): AxiosPromise<RespostaDetalhesBoleto> {
-    return await apiBancoDoBrasil.get(`/boletos/${pathParams.id}`, {
-      params: {numeroConvenio: numeroConvenio},
+    return await apiBancoDoBrasil.get(`/boletos/${tituloDeCobranca}`, {
+      params: { numeroConvenio: numeroConvenio },
     });
   }
 
   async alteraBoleto(
-    pathParams: any,
+    tituloDeCobranca: number,
     body: AlteraBoleto
   ): AxiosPromise<AlteraBoleto> {
-    return await apiBancoDoBrasil.patch(`/boletos/${pathParams.id}`, {
+    return await apiBancoDoBrasil.patch(`/boletos/${tituloDeCobranca}`, {
       params: {},
       data: body,
     });

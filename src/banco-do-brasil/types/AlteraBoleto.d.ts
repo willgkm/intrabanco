@@ -1,3 +1,5 @@
+import { Juros } from "./Juros";
+
 export type AlteraBoleto = {
   numeroConvenio?: number;
   indicadorNovaDataVencimento: string;
@@ -82,12 +84,6 @@ type Abatimento = {
 
 type AlteracaoAbatimento = {
   novoValorAbatimento: number;
-};
-
-type Juros = {
-  tipoJuros: number;
-  valorJuros: number;
-  taxaJuros: number;
 };
 
 type Multa = {

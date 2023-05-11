@@ -1,7 +1,4 @@
-import { RequisicaoListaBoleto } from "../types/cobranca/RequisicaoListaBoletos";
-import axios, { AxiosPromise, AxiosResponse } from "axios";
-import { RespostaListaBoletos } from "../types/cobranca/RespostaListaBoletos";
-import apiBancoDoBrasil from "../config/AxiosBancoDoBrasil";
+import axios, { AxiosPromise } from "axios";
 
 const homUrl = "https://api-pix.hm.bb.com.br/pix/v2";
 // const prodUrl:string =  "https://api-pix.bb.com.br/pix/v2";
@@ -23,75 +20,77 @@ export default class pixAPI {
   //! versão 2.3.0
 
   //* cobrança
-  async criarCobrancaImediataComIdentificador(txid: string) {
+  async criarCobrancaImediataComIdentificador(txid: string): AxiosPromise<any> {
     return await apiPix.put(`/cob/${txid}`);
   }
-  async revisarCobrancaImediata(txid: string) {
+  async revisarCobrancaImediata(txid: string): AxiosPromise<any> {
     return await apiPix.patch(`/cob/${txid}`);
   }
-  async consultarrCobrancaImediata(txid: string) {
+  async consultarrCobrancaImediata(txid: string): AxiosPromise<any> {
     return await apiPix.get(`/cob/${txid}`);
   }
-  async criarCobrancaImediataSemIdentificador() {
+  async criarCobrancaImediataSemIdentificador(): AxiosPromise<any> {
     return await apiPix.post(`/cob`);
   }
-  async consultarListaDeCobracasImediatas() {
+  async consultarListaDeCobracasImediatas(): AxiosPromise<any> {
     return await apiPix.get(`/cob`);
   }
 
   //* cobrança com vencimento
-  async criarCobrancaComIdentificadorEVencimento(txid: string) {
+  async criarCobrancaComIdentificadorEVencimento(
+    txid: string
+  ): AxiosPromise<any> {
     return await apiPix.put(`/cobv/${txid}`);
   }
-  async revisarCobrancaComVencimento(txid: string) {
+  async revisarCobrancaComVencimento(txid: string): AxiosPromise<any> {
     return await apiPix.patch(`/cobv/${txid}`);
   }
-  async consultarCobrancaComVencimento(txid: string) {
+  async consultarCobrancaComVencimento(txid: string): AxiosPromise<any> {
     return await apiPix.get(`/cobv/${txid}`);
   }
-  async listarCobrancasComVencimento() {
+  async listarCobrancasComVencimento(): AxiosPromise<any> {
     return await apiPix.get(`/cobv`);
   }
 
   //* PIX
-  async consultarPix(e2eid: string) {
+  async consultarPix(e2eid: string): AxiosPromise<any> {
     return await apiPix.get(`/pix/${e2eid}`);
   }
-  async ConsultarPixRecebidos() {
+  async ConsultarPixRecebidos(): AxiosPromise<any> {
     return await apiPix.get(`/pix`);
   }
-  async solicitarDevolucaoPix(e2eid: string, id: string) {
+  async solicitarDevolucaoPix(e2eid: string, id: string): AxiosPromise<any> {
     return await apiPix.put(`/pix/${e2eid}/devolucao/${id}`);
   }
-  async consultarDevolucaoPix(e2eid: string, id: string) {
+  async consultarDevolucaoPix(e2eid: string, id: string): AxiosPromise<any> {
     return await apiPix.get(`/pix/${e2eid}/devolucao/${id}`);
   }
 
-  //* WebHook 
-  async configurarWebhookPix(chave: string) {
+  //* WebHook
+  async configurarWebhookPix(chave: string): AxiosPromise<any> {
     return await apiPix.put(`/webhook/${chave}`);
   }
-  async exibirInformacoesWebhookPix(chave: string) {
+  async exibirInformacoesWebhookPix(chave: string): AxiosPromise<any> {
     return await apiPix.get(`/webhook/${chave}`);
   }
-  async cancelarWebhookPix(chave: string) {
+  async cancelarWebhookPix(chave: string): AxiosPromise<any> {
     return await apiPix.delete(`/webhook/${chave}`);
   }
-  async consultarWebhookPIx() {
+  async consultarWebhookPIx(): AxiosPromise<any> {
     return await apiPix.get(`/webhook/`);
   }
 
   //* Loc
-  async consultarLocationsCadastradas() {
+  async consultarLocationsCadastradas(): AxiosPromise<any> {
     return await apiPix.get(`/loc`);
   }
-  async criarLocationsDoPayload() {
+  async criarLocationsDoPayload(): AxiosPromise<any> {
     return await apiPix.post(`/loc`);
   }
-  async recuperarLocationDoPayload(id: string) {
+  async recuperarLocationDoPayload(id: string): AxiosPromise<any> {
     return await apiPix.get(`/loc/${id}`);
   }
-  async desvincularCobrancaDeUmaLocation(id: string) {
+  async desvincularCobrancaDeUmaLocation(id: string): AxiosPromise<any> {
     return await apiPix.get(`/loc/${id}/txid`);
   }
 }
